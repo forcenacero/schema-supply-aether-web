@@ -24,7 +24,6 @@ const JournalDetail = () => {
 
   if (error) {
     console.error('Error loading journal entry:', error);
-    return navigate('/journal');
   }
 
   return (

@@ -24,7 +24,6 @@ const ProjectDetail = () => {
 
   if (error) {
     console.error('Error loading project:', error);
-    return navigate('/projects');
   }
 
   return (
