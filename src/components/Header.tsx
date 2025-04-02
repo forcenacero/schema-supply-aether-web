@@ -39,7 +39,7 @@ const Header = () => {
     >
       <div className="container-custom flex items-center justify-between">
         <Link to="/" className="text-schema-black text-2xl font-light z-50">
-          upcofly
+          schema.supply
         </Link>
         
         <button 
@@ -57,6 +57,9 @@ const Header = () => {
         <nav className="hidden lg:flex items-center space-x-8">
           <Link to="/about" className="text-schema-black hover:text-schema-gray link-underline">
             About
+          </Link>
+          <Link to="/services" className="text-schema-black hover:text-schema-gray link-underline">
+            Services
           </Link>
           <Link to="/projects" className="text-schema-black hover:text-schema-gray link-underline">
             Projects
@@ -88,6 +91,13 @@ const Header = () => {
               onClick={closeMenu}
             >
               About
+            </Link>
+            <Link 
+              to="/services" 
+              className="text-4xl text-schema-black hover:text-schema-gray transition-colors"
+              onClick={closeMenu}
+            >
+              Services
             </Link>
             <Link 
               to="/projects" 

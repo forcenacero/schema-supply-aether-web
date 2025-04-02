@@ -52,14 +52,14 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) 
     // Add hreflang link elements to head
     const updateHreflangTags = () => {
       // Remove any existing hreflang tags
-      document.querySelectorAll('link[rel="alternate"][hrefLang]').forEach(el => el.remove());
+      document.querySelectorAll('link[rel="alternate"][hreflang]').forEach(el => el.remove());
       
       // Add new hreflang tags
       const path = window.location.pathname;
       const addHreflangTag = (lang: string, fullLang: string) => {
         const link = document.createElement('link');
         link.rel = 'alternate';
-        link.hrefLang = lang;
+        link.hreflang = lang;
         link.href = `${window.location.origin}${path}?lang=${fullLang}`;
         document.head.appendChild(link);
       };
