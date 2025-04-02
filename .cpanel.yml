@@ -3,5 +3,4 @@ deployment:
   tasks:
     - /opt/cpanel/ea-nodejs18/bin/npm install  # Instala dependencias de la app
     - /opt/cpanel/ea-nodejs18/bin/npm run build  # Construye los archivos estáticos
-    - rsync -a build/ ~/public_html/  # Copia los archivos generados a public_html
 
