@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
+import LanguageSwitcher from './LanguageSwitcher';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -38,7 +39,7 @@ const Header = () => {
     >
       <div className="container-custom flex items-center justify-between">
         <Link to="/" className="text-schema-black text-2xl font-light z-50">
-          schema.supply
+          upcofly
         </Link>
         
         <button 
@@ -66,6 +67,7 @@ const Header = () => {
           <Link to="/contact" className="text-schema-black hover:text-schema-gray link-underline">
             Contact
           </Link>
+          <LanguageSwitcher />
         </nav>
         
         {/* Mobile Menu */}
@@ -108,6 +110,9 @@ const Header = () => {
             >
               Contact
             </Link>
+            <div className="mt-4">
+              <LanguageSwitcher />
+            </div>
           </nav>
         </div>
       </div>

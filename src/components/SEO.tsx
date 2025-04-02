@@ -1,6 +1,7 @@
 
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
+import { useLanguage } from '../hooks/useLanguage';
 
 interface SEOProps {
   title?: string;
@@ -11,13 +12,14 @@ interface SEOProps {
 }
 
 const SEO: React.FC<SEOProps> = ({
-  title = 'Schema Supply | High-End Lifestyle & Design',
-  description = 'Schema Supply is a high-end lifestyle and design brand focused on creating timeless, minimalist experiences.',
+  title = 'Upcofly | High-End Lifestyle & Design',
+  description = 'Upcofly is a high-end lifestyle and design brand focused on creating timeless, minimalist experiences.',
   image = 'https://lovable.dev/opengraph-image-p98pqg.png',
-  url = 'https://www.schema.supply',
+  url = 'https://www.upcofly.com',
   type = 'website',
 }) => {
-  const siteTitle = title.includes('Schema Supply') ? title : `${title} | Schema Supply`;
+  const { language } = useLanguage();
+  const siteTitle = title.includes('Upcofly') ? title : `${title} | Upcofly`;
   
   return (
     <Helmet>
@@ -25,12 +27,16 @@ const SEO: React.FC<SEOProps> = ({
       <title>{siteTitle}</title>
       <meta name="description" content={description} />
       
+      {/* Language metadata */}
+      <html lang={language.split('-')[0]} />
+      
       {/* Open Graph / Facebook */}
       <meta property="og:type" content={type} />
       <meta property="og:url" content={url} />
       <meta property="og:title" content={siteTitle} />
       <meta property="og:description" content={description} />
       <meta property="og:image" content={image} />
+      <meta property="og:locale" content={language} />
       
       {/* Twitter */}
       <meta name="twitter:card" content="summary_large_image" />
@@ -41,6 +47,12 @@ const SEO: React.FC<SEOProps> = ({
       
       {/* Canonical link */}
       <link rel="canonical" href={url} />
+      
+      {/* Hreflang links for language alternates */}
+      <link rel="alternate" hreflang="x-default" href={url} />
+      <link rel="alternate" hreflang="en" href={`${url}?lang=en-US`} />
+      <link rel="alternate" hreflang="es" href={`${url}?lang=es`} />
+      <link rel="alternate" hreflang="fr" href={`${url}?lang=fr`} />
     </Helmet>
   );
 };

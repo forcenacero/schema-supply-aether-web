@@ -2,19 +2,21 @@
 import React, { useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
-import { getJournalEntryBySlug } from '../lib/contentful';
+import { getJournalEntryBySlug, SupportedLanguage, DEFAULT_LANGUAGE } from '../lib/contentful';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import Loading from '../components/Loading';
 import SEO from '../components/SEO';
+import { useLanguage } from '../hooks/useLanguage';
 
 const JournalDetail = () => {
   const { slug } = useParams<{ slug: string }>();
   const navigate = useNavigate();
+  const { language } = useLanguage();
 
   const { data: entry, isLoading, error } = useQuery({
-    queryKey: ['journalEntry', slug],
-    queryFn: () => getJournalEntryBySlug(slug || ''),
+    queryKey: ['journalEntry', slug, language],
+    queryFn: () => getJournalEntryBySlug(slug || '', language as SupportedLanguage || DEFAULT_LANGUAGE),
     enabled: !!slug,
   });
 
@@ -33,7 +35,7 @@ const JournalDetail = () => {
           title={entry.fields.title}
           description={entry.fields.excerpt}
           image={entry.fields.image.fields.file.url}
-          url={`https://www.schema.supply/journal/${entry.fields.slug}`}
+          url={`https://www.upcofly.com/journal/${entry.fields.slug}`}
           type="article"
         />
       )}
