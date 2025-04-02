@@ -1,7 +1,6 @@
 ---
 deployment:
   tasks:
-    - export NODE_VERSION=18  
-    - /opt/cpanel/ea-nodejs18/bin/npm install  
-    - /opt/cpanel/ea-nodejs18/bin/npm run build  
-    - /opt/cpanel/ea-nodejs18/bin/npm start  
+    - /opt/cpanel/ea-nodejs18/bin/npm install  # Instalar dependencias
+    - /opt/cpanel/ea-nodejs18/bin/npm run build  # Construir la aplicación
+    - rsync -a build/ ~/public_html/  # Mover la app construida a public_html
