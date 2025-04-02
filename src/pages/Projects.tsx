@@ -7,11 +7,13 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import Loading from '../components/Loading';
 import SEO from '../components/SEO';
+import { useLanguage } from '../hooks/useLanguage';
 
 const Projects = () => {
+  const { language } = useLanguage();
   const { data: projects, isLoading, error } = useQuery({
-    queryKey: ['allProjects'],
-    queryFn: getAllProjects
+    queryKey: ['allProjects', language],
+    queryFn: () => getAllProjects(language)
   });
 
   useEffect(() => {

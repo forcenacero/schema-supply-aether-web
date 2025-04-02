@@ -7,11 +7,13 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import Loading from '../components/Loading';
 import SEO from '../components/SEO';
+import { useLanguage } from '../hooks/useLanguage';
 
 const Journal = () => {
+  const { language } = useLanguage();
   const { data: entries, isLoading, error } = useQuery({
-    queryKey: ['allJournalEntries'],
-    queryFn: getAllJournalEntries
+    queryKey: ['allJournalEntries', language],
+    queryFn: () => getAllJournalEntries(language)
   });
 
   useEffect(() => {

@@ -15,8 +15,6 @@ const LanguageSwitcher: React.FC = () => {
 
   const handleLanguageChange = (lang: SupportedLanguage) => {
     setLanguage(lang);
-    // Reload the current page to refresh content with the new language
-    window.location.reload();
   };
 
   return (

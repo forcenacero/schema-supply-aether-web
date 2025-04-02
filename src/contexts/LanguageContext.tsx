@@ -1,6 +1,7 @@
 
 import React, { createContext, useState, useEffect, ReactNode } from 'react';
 import { SupportedLanguage, DEFAULT_LANGUAGE } from '../lib/contentful';
+import { useQueryClient } from '@tanstack/react-query';
 
 interface LanguageContextType {
   language: SupportedLanguage;
@@ -17,7 +18,9 @@ interface LanguageProviderProps {
 }
 
 export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) => {
-  const [language, setLanguage] = useState<SupportedLanguage>(() => {
+  const queryClient = useQueryClient();
+  
+  const [language, setLanguageState] = useState<SupportedLanguage>(() => {
     // Try to get saved language from localStorage
     const savedLanguage = localStorage.getItem('upcofly-language') as SupportedLanguage;
     // Check browser language
@@ -34,6 +37,12 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) 
     return DEFAULT_LANGUAGE;
   });
 
+  const setLanguage = (newLanguage: SupportedLanguage) => {
+    setLanguageState(newLanguage);
+    // Invalidate queries to refetch data in new language
+    queryClient.invalidateQueries();
+  };
+
   // Save language preference to localStorage
   useEffect(() => {
     localStorage.setItem('upcofly-language', language);
@@ -43,14 +52,14 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) 
     // Add hreflang link elements to head
     const updateHreflangTags = () => {
       // Remove any existing hreflang tags
-      document.querySelectorAll('link[rel="alternate"][hreflang]').forEach(el => el.remove());
+      document.querySelectorAll('link[rel="alternate"][hrefLang]').forEach(el => el.remove());
       
       // Add new hreflang tags
       const path = window.location.pathname;
       const addHreflangTag = (lang: string, fullLang: string) => {
         const link = document.createElement('link');
         link.rel = 'alternate';
-        link.hreflang = lang;
+        link.hrefLang = lang;
         link.href = `${window.location.origin}${path}?lang=${fullLang}`;
         document.head.appendChild(link);
       };

@@ -1,4 +1,3 @@
-
 import { createClient } from 'contentful';
 import type { EntryFieldTypes, EntrySkeletonType } from 'contentful';
 
@@ -155,7 +154,6 @@ const mockProjects: IProject[] = [
   }
 ];
 
-// Mock data with Spanish translations
 const mockProjectsEs: IProject[] = [
   {
     contentTypeId: 'project',
@@ -216,7 +214,6 @@ const mockProjectsEs: IProject[] = [
   }
 ];
 
-// Mock data with French translations
 const mockProjectsFr: IProject[] = [
   {
     contentTypeId: 'project',
@@ -340,7 +337,6 @@ const mockJournalEntries: IJournalEntry[] = [
   }
 ];
 
-// Mock journal entries with Spanish translations
 const mockJournalEntriesEs: IJournalEntry[] = [
   {
     contentTypeId: 'journalEntry',
@@ -390,7 +386,7 @@ const mockJournalEntriesEs: IJournalEntry[] = [
       slug: 'typography-trends',
       category: 'Tipografía',
       date: '8 de Febrero, 2023',
-      excerpt: 'Las últimas innovaciones y renacimientos en el diseño e implementación de tipografías.',
+      excerpt: 'Las últimas innovaciones y renaissances en el diseño e implementación de tipografías.',
       content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in dui mauris. Vivamus hendrerit arcu sed erat molestie vehicula. Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor. Ut in nulla enim. Phasellus molestie magna non est bibendum non venenatis nisl tempor. Suspendisse dictum feugiat nisl ut dapibus. Mauris iaculis porttitor posuere. Praesent id metus massa, ut blandit odio.',
       featured: true,
       image: {
@@ -404,7 +400,6 @@ const mockJournalEntriesEs: IJournalEntry[] = [
   }
 ];
 
-// Mock journal entries with French translations
 const mockJournalEntriesFr: IJournalEntry[] = [
   {
     contentTypeId: 'journalEntry',
@@ -504,7 +499,7 @@ export const getFeaturedProjects = async (locale: SupportedLanguage = DEFAULT_LA
       content_type: 'project',
       'fields.featured': true,
       limit: 3,
-      order: '-sys.createdAt',
+      order: ['-sys.createdAt'],
       locale: locale
     });
     
@@ -525,7 +520,7 @@ export const getAllProjects = async (locale: SupportedLanguage = DEFAULT_LANGUAG
     
     const response = await contentfulClient.getEntries<ProjectEntryType>({
       content_type: 'project',
-      order: '-sys.createdAt',
+      order: ['-sys.createdAt'],
       locale: locale
     });
     
@@ -570,7 +565,7 @@ export const getFeaturedJournalEntries = async (locale: SupportedLanguage = DEFA
       content_type: 'journalEntry',
       'fields.featured': true,
       limit: 3,
-      order: '-sys.createdAt',
+      order: ['-sys.createdAt'],
       locale: locale
     });
     
@@ -591,7 +586,7 @@ export const getAllJournalEntries = async (locale: SupportedLanguage = DEFAULT_L
     
     const response = await contentfulClient.getEntries<JournalEntryType>({
       content_type: 'journalEntry',
-      order: '-sys.createdAt',
+      order: ['-sys.createdAt'],
       locale: locale
     });
     

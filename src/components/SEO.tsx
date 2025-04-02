@@ -49,10 +49,10 @@ const SEO: React.FC<SEOProps> = ({
       <link rel="canonical" href={url} />
       
       {/* Hreflang links for language alternates */}
-      <link rel="alternate" hreflang="x-default" href={url} />
-      <link rel="alternate" hreflang="en" href={`${url}?lang=en-US`} />
-      <link rel="alternate" hreflang="es" href={`${url}?lang=es`} />
-      <link rel="alternate" hreflang="fr" href={`${url}?lang=fr`} />
+      <link rel="alternate" hrefLang="x-default" href={url} />
+      <link rel="alternate" hrefLang="en" href={`${url}?lang=en-US`} />
+      <link rel="alternate" hrefLang="es" href={`${url}?lang=es`} />
+      <link rel="alternate" hrefLang="fr" href={`${url}?lang=fr`} />
     </Helmet>
   );
 };

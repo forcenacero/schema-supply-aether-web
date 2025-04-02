@@ -4,14 +4,16 @@ import { Link } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { getFeaturedProjects, IProject } from '../lib/contentful';
 import Loading from './Loading';
+import { useLanguage } from '../hooks/useLanguage';
 
 const FeaturedProjects = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const projectRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const { language } = useLanguage();
   
   const { data: projects, isLoading, error } = useQuery({
-    queryKey: ['featuredProjects'],
-    queryFn: getFeaturedProjects
+    queryKey: ['featuredProjects', language],
+    queryFn: () => getFeaturedProjects(language)
   });
   
   useEffect(() => {

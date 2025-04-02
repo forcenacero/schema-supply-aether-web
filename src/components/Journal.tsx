@@ -4,14 +4,16 @@ import { Link } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { getFeaturedJournalEntries, IJournalEntry } from '../lib/contentful';
 import Loading from './Loading';
+import { useLanguage } from '../hooks/useLanguage';
 
 const Journal = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const contentRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const { language } = useLanguage();
   
   const { data: journalEntries, isLoading, error } = useQuery({
-    queryKey: ['featuredJournalEntries'],
-    queryFn: getFeaturedJournalEntries
+    queryKey: ['featuredJournalEntries', language],
+    queryFn: () => getFeaturedJournalEntries(language)
   });
   
   useEffect(() => {
