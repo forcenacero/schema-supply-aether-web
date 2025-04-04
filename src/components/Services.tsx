@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { useLanguage } from '../hooks/useLanguage';
 import {
@@ -163,7 +162,7 @@ const services = [
         description: {
           'en-US': 'Everyday objects elevated through thoughtful design.',
           'es': 'Objetos cotidianos elevados a través de un diseño cuidadoso.',
-          'fr': 'Objets quotidiens élevés grâce à une conception réfléchie.'
+          'fr': 'Objets quotidiens elevados gracias a una conception réfléchie.'
         },
         image: 'https://images.unsplash.com/photo-1526406915894-7bcd65f60845?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80'
       },
@@ -335,19 +334,17 @@ const ServiceSection: React.FC<ServiceProps> = ({ service }) => {
               <CarouselContent>
                 {service.subservices.map((subservice) => (
                   <CarouselItem key={subservice.id} className="md:basis-1/2 lg:basis-1/2">
-                    <div className="bg-schema-offwhite p-1">
-                      <div className="aspect-[4/3] overflow-hidden">
-                        <img 
-                          src={subservice.image} 
-                          alt={subservice.name[language as keyof typeof subservice.name] || subservice.name['en-US']} 
-                          className="w-full h-full object-cover"
-                        />
-                      </div>
-                      <div className="p-6">
-                        <h3 className="text-xl font-medium mb-2">
+                    <div className="relative aspect-[4/3] overflow-hidden">
+                      <img 
+                        src={subservice.image} 
+                        alt={subservice.name[language as keyof typeof subservice.name] || subservice.name['en-US']} 
+                        className="w-full h-full object-cover"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-schema-black/70 to-transparent p-6 flex flex-col justify-end">
+                        <h3 className="text-xl font-medium mb-2 text-schema-white">
                           {subservice.name[language as keyof typeof subservice.name] || subservice.name['en-US']}
                         </h3>
-                        <p className="text-schema-darkgray">
+                        <p className="text-schema-white/90">
                           {subservice.description[language as keyof typeof subservice.description] || subservice.description['en-US']}
                         </p>
                       </div>
@@ -356,8 +353,8 @@ const ServiceSection: React.FC<ServiceProps> = ({ service }) => {
                 ))}
               </CarouselContent>
               <div className="hidden md:block">
-                <CarouselPrevious />
-                <CarouselNext />
+                <CarouselPrevious className="left-2 text-schema-white bg-schema-black/20 hover:bg-schema-black/40 border-none" />
+                <CarouselNext className="right-2 text-schema-white bg-schema-black/20 hover:bg-schema-black/40 border-none" />
               </div>
             </Carousel>
           </div>
